@@ -1,0 +1,65 @@
+# Google Cloud Build configuration for Orthanc PACS Radiweb
+# Deploy to Cloud Run with Cloud SQL PostgreSQL
+
+steps:
+  # Build the container image
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/orthanc-pacs-radiweb:$COMMIT_SHA'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/orthanc-pacs-radiweb:latest'
+      - '.'
+
+  # Push the container image to Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'gcr.io/$PROJECT_ID/orthanc-pacs-radiweb:$COMMIT_SHA'
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'gcr.io/$PROJECT_ID/orthanc-pacs-radiweb:latest'
+
+  # Deploy container image to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'orthanc-pacs-radiweb'
+      - '--image'
+      - 'gcr.io/$PROJECT_ID/orthanc-pacs-radiweb:$COMMIT_SHA'
+      - '--region'
+      - 'us-central1'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+      - '--port'
+      - '8042'
+      - '--memory'
+      - '2Gi'
+      - '--cpu'
+      - '2'
+      - '--max-instances'
+      - '10'
+      - '--set-env-vars'
+      - 'ORTHANC_NAME=RADIWEB_PACS,DICOM_AET=RADIWEB_PACS,ENABLE_HTTPS=true'
+      - '--set-cloudsql-instances'
+      - '$PROJECT_ID:us-central1:orthanc-postgres'
+
+# Store images in Google Container Registry
+images:
+  - 'gcr.io/$PROJECT_ID/orthanc-pacs-radiweb:$COMMIT_SHA'
+  - 'gcr.io/$PROJECT_ID/orthanc-pacs-radiweb:latest'
+
+# Build options
+options:
+  logging: CLOUD_LOGGING_ONLY
+  machineType: 'E2_HIGHCPU_8'
+
+# Timeout
+timeout: '1200s'
+

@@ -1,0 +1,23 @@
+# Dependências Python para testes do Orthanc PACS Radiweb
+
+# Biblioteca para requisições HTTP
+requests>=2.28.0
+
+# Bibliotecas DICOM
+pydicom>=2.3.0
+pynetdicom>=2.0.0
+
+# Bibliotecas para processamento de imagens (opcional)
+numpy>=1.21.0
+Pillow>=9.0.0
+
+# Bibliotecas para testes avançados (opcional)
+pytest>=7.0.0
+pytest-html>=3.1.0
+
+# Bibliotecas para análise de performance (opcional)
+psutil>=5.9.0
+
+# Bibliotecas para relatórios (opcional)
+jinja2>=3.1.0
+
