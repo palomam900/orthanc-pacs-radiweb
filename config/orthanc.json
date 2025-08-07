@@ -1,182 +1,86 @@
 {
-  // Identificação do servidor
   "Name": "RADIWEB_PACS",
-  "DicomAet": "RADIWEB_PACS",
-  
-  // Portas de rede
-  "DicomPort": 4242,
-  "HttpPort": 8042,
-  
-  // Acesso remoto e autenticação
-  "RemoteAccessAllowed": true,
-  "AuthenticationEnabled": true,
-  "RegisteredUsers": {
-    "admin": "admin",
-    "viewer": "viewer123"
-  },
-  
-  // Configurações de segurança
-  "SslEnabled": false,
-  "WebDavEnabled": false,
-  "ExecuteLuaEnabled": false,
-  "RestApiWriteToFileSystemEnabled": false,
-  "OrthancExplorerEnabled": true,
-  
-  // Configurações DICOM
-  "DicomCheckCalledAet": false,
-  "DicomCheckModalityHost": false,
-  "DicomAlwaysAllowEcho": true,
-  "DicomAlwaysAllowFind": true,
-  "DicomAlwaysAllowMove": true,
-  "DicomAlwaysAllowGet": true,
-  "DicomAlwaysAllowStore": true,
-  
-  // Configurações de armazenamento
   "StorageDirectory": "/var/lib/orthanc/db",
   "IndexDirectory": "/var/lib/orthanc/db",
   "StorageCompression": false,
   "MaximumStorageSize": 0,
   "MaximumPatientCount": 0,
   
-  // Configurações de performance
-  "LimitFindResults": 0,
-  "LimitFindInstances": 0,
-  "LogExportedResources": false,
-  "KeepAlive": true,
-  "TcpNoDelay": true,
-  "HttpTimeout": 60,
+  "RemoteAccessAllowed": true,
+  "AuthenticationEnabled": true,
+  "RegisteredUsers": {
+    "admin": "admin_radiweb_2024",
+    "viewer": "viewer_radiweb_2024",
+    "api": "api_radiweb_2024"
+  },
+  
+  "HttpPort": 8042,
+  "HttpDescribeErrors": true,
+  "HttpCompressionEnabled": true,
   "HttpRequestTimeout": 30,
   
-  // Configurações de log
-  "LogLevel": "default",
-  "LogFile": "",
-  "VerboseEnabled": false,
-  "TraceEnabled": false,
+  "DicomAet": "RADIWEB_PACS",
+  "DicomCheckCalledAet": false,
+  "DicomPort": 4242,
+  "DefaultEncoding": "Latin1",
+  "AcceptedTransferSyntaxes": ["1.2.840.10008.1.2", "1.2.840.10008.1.2.1", "1.2.840.10008.1.2.2"],
   
-  // Plugins habilitados
-  "Plugins": [],
-  
-  // Configurações do Stone Web Viewer
-  "StoneWebViewer": {
-    "Enable": true,
-    "DateFormat": "DD/MM/YYYY",
-    "Language": "pt"
-  },
-  
-  // Configurações DICOMweb
-  "DicomWeb": {
-    "Enable": true,
-    "Root": "/dicom-web/",
-    "EnableMetadata": true,
-    "Host": "0.0.0.0",
-    "Port": 8042,
-    "Ssl": false
-  },
-  
-  // Configurações de CORS
-  "HttpHeaders": {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-    "Access-Control-Allow-Headers": "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization",
-    "Access-Control-Max-Age": "1728000"
-  },
-  
-  // Configurações de compressão
-  "DeflateCompressionLevel": 6,
-  "GzipCompressionLevel": 6,
-  
-  // Configurações de cache
-  "HttpsCACertificates": "",
-  "HttpProxy": "",
-  "HttpVerbose": false,
-  "HttpsVerifyPeers": true,
-  "HttpsCACertificatesFile": "",
-  
-  // Configurações de modalidades DICOM
-  "DicomModalities": {
-    "sample": ["STORESCP", "127.0.0.1", 2000]
-  },
-  
-  // Configurações de peers Orthanc
-  "OrthancPeers": {
-    "sample": ["http://127.0.0.1:8043/", "username", "password"]
-  },
-  
-  // Configurações de transferência
+  "UnknownSopClassAccepted": false,
   "DicomScuTimeout": 10,
   "DicomScuPreferredTransferSyntax": "1.2.840.10008.1.2.1",
   
-  // Configurações de metadados
-  "DefaultEncoding": "Latin1",
-  "AcceptedTransferSyntaxes": ["1.2.840.10008.1.2*"],
-  
-  // Configurações de jobs
-  "ConcurrentJobs": 2,
-  "JobsHistorySize": 10,
-  
-  // Configurações de webhook (para notificações futuras)
-  "HttpHeaders": {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-    "Access-Control-Allow-Headers": "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization"
+  "PostgreSQL": {
+    "EnableIndex": true,
+    "EnableStorage": false,
+    "Host": "localhost",
+    "Port": 5432,
+    "Database": "orthanc",
+    "Username": "orthanc",
+    "Password": "orthanc",
+    "EnableSsl": false,
+    "MaximumConnectionRetries": 10,
+    "ConnectionRetryInterval": 5
   },
   
-  // Configurações de revisão
-  "RevisionHistorySize": 100,
+  "Plugins": [
+    "/usr/share/orthanc/plugins",
+    "/usr/local/share/orthanc/plugins"
+  ],
   
-  // Configurações de estudos
-  "StudyRetentionTime": 0,
-  "PatientRetentionTime": 0,
+  "StoneWebViewer": {
+    "Enable": true,
+    "DateFormat": "DD/MM/YYYY",
+    "Language": "pt",
+    "ShowInfoPanel": true,
+    "ShowSeriesPanel": true
+  },
   
-  // Configurações de backup
-  "IngestTranscoding": "1.2.840.10008.1.2.1",
-  "IngestTranscodingOfUncompressed": true,
-  "IngestTranscodingOfCompressed": true,
+  "DicomWeb": {
+    "Enable": true,
+    "Root": "/dicom-web/",
+    "EnableWado": true,
+    "WadoRoot": "/wado",
+    "Ssl": false,
+    "StowMaxInstances": 10,
+    "StowMaxSize": 100,
+    "QidoCaseSensitive": false
+  },
   
-  // Configurações de rede avançadas
-  "DicomTlsEnabled": false,
-  "DicomTlsCertificate": "",
-  "DicomTlsPrivateKey": "",
-  "DicomTlsTrustedCertificates": "",
+  "ConcurrentJobs": 4,
+  "JobsHistorySize": 10,
   
-  // Configurações de usuário
-  "UserMetadata": {},
+  "SaveJobs": true,
+  "OverwriteInstances": false,
+  "LogExportedResources": false,
   
-  // Configurações de sincronização
-  "SynchronousCMove": true,
+  "KeepAlive": true,
+  "TcpNoDelay": true,
+  "HttpThreadsCount": 50,
+  "HttpTimeout": 60,
   
-  // Configurações de compressão de imagem
-  "DeflateCompressionLevel": 6,
-  "JpegQuality": 90,
-  
-  // Configurações de limite de recursos
-  "LimitResources": 100,
-  
-  // Configurações de cache de imagens
-  "MaximumStorageCacheSize": 128,
-  
-  // Configurações de timeout
-  "DicomAssociationCloseDelay": 5,
-  "DicomAssociationTimeout": 30,
-  
-  // Configurações de encoding
-  "DefaultPrivateCreator": "",
-  "Dictionary": {},
-  
-  // Configurações de filtros Lua (para controle de acesso)
   "LuaScripts": [],
-  
-  // Configurações de notificações
-  "StableAge": 60,
-  "StrictAetComparison": false,
-  
-  // Configurações de transferência de dados
-  "UnknownSopClassAccepted": false,
-  
-  // Configurações de worklist
-  "WorklistAnswersCount": 100,
-  
-  // Configurações de ZIP
-  "ZipLoaderThreads": 0
+  "Warnings": {
+    "W001_TagsBeingReadFromStorage": false,
+    "W002_InconsistentDicomTagsInDb": false
+  }
 }
-
