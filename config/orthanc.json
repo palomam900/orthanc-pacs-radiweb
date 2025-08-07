@@ -1,86 +1,20 @@
 {
   "Name": "RADIWEB_PACS",
-  "StorageDirectory": "/var/lib/orthanc/db",
-  "IndexDirectory": "/var/lib/orthanc/db",
-  "StorageCompression": false,
-  "MaximumStorageSize": 0,
-  "MaximumPatientCount": 0,
-  
   "RemoteAccessAllowed": true,
   "AuthenticationEnabled": true,
   "RegisteredUsers": {
-    "admin": "admin_radiweb_2024",
-    "viewer": "viewer_radiweb_2024",
-    "api": "api_radiweb_2024"
+    "admin": "admin123",
+    "viewer": "viewer123"
   },
-  
   "HttpPort": 8042,
-  "HttpDescribeErrors": true,
-  "HttpCompressionEnabled": true,
-  "HttpRequestTimeout": 30,
-  
   "DicomAet": "RADIWEB_PACS",
-  "DicomCheckCalledAet": false,
   "DicomPort": 4242,
-  "DefaultEncoding": "Latin1",
-  "AcceptedTransferSyntaxes": ["1.2.840.10008.1.2", "1.2.840.10008.1.2.1", "1.2.840.10008.1.2.2"],
-  
-  "UnknownSopClassAccepted": false,
-  "DicomScuTimeout": 10,
-  "DicomScuPreferredTransferSyntax": "1.2.840.10008.1.2.1",
-  
   "PostgreSQL": {
     "EnableIndex": true,
-    "EnableStorage": false,
-    "Host": "localhost",
-    "Port": 5432,
-    "Database": "orthanc",
-    "Username": "orthanc",
-    "Password": "orthanc",
-    "EnableSsl": false,
-    "MaximumConnectionRetries": 10,
-    "ConnectionRetryInterval": 5
+    "EnableStorage": false
   },
-  
-  "Plugins": [
-    "/usr/share/orthanc/plugins",
-    "/usr/local/share/orthanc/plugins"
-  ],
-  
+  "Plugins": ["/usr/share/orthanc/plugins"],
   "StoneWebViewer": {
-    "Enable": true,
-    "DateFormat": "DD/MM/YYYY",
-    "Language": "pt",
-    "ShowInfoPanel": true,
-    "ShowSeriesPanel": true
-  },
-  
-  "DicomWeb": {
-    "Enable": true,
-    "Root": "/dicom-web/",
-    "EnableWado": true,
-    "WadoRoot": "/wado",
-    "Ssl": false,
-    "StowMaxInstances": 10,
-    "StowMaxSize": 100,
-    "QidoCaseSensitive": false
-  },
-  
-  "ConcurrentJobs": 4,
-  "JobsHistorySize": 10,
-  
-  "SaveJobs": true,
-  "OverwriteInstances": false,
-  "LogExportedResources": false,
-  
-  "KeepAlive": true,
-  "TcpNoDelay": true,
-  "HttpThreadsCount": 50,
-  "HttpTimeout": 60,
-  
-  "LuaScripts": [],
-  "Warnings": {
-    "W001_TagsBeingReadFromStorage": false,
-    "W002_InconsistentDicomTagsInDb": false
+    "Enable": true
   }
 }
